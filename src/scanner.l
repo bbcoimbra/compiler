@@ -42,3 +42,13 @@ number  0|[1-9][0-9]*
 {ws}          /* ignore */;
 .	printf("bad input character '%s' at line %d\n", yytext, yylineno);
 
+
+%%
+
+int yywrap (void) {return 1;}
+
+TreeNode * new_token(void) {
+	TreeNode * n = (TreeNode *) malloc(sizeof(TreeNode));
+	return n;
+}
+
