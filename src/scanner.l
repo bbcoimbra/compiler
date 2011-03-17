@@ -8,7 +8,7 @@
 #include "parser.tab.h"
 %}
 
-ws  [:blank:]*
+ws  [[:blank:]\n]*
 identifier  [:alpha:][:alnum:]*
 number  0|[1-9][0-9]*
 
