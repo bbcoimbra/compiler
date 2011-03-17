@@ -14,7 +14,6 @@ number  0|[1-9][0-9]*
 
 %%
 
-{ws}          /* ignore */;
 "and"         return AND;
 "if"          return IF;
 "else"        return ELSE;
@@ -38,3 +37,4 @@ number  0|[1-9][0-9]*
 ")"           return RPAREN;
 {number}      { yylval = atoi(yytext); return NUM; }
 {identifier}  { yylval = strdup(yytext); return ID; }
+{ws}          /* ignore */;
