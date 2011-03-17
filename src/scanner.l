@@ -7,6 +7,7 @@
 #include <string.h>
 #include "global.h"
 #include "y.tab.h"
+TreeNode * new_token(void); 
 %}
 
 ws  [[:blank:]\n]*
