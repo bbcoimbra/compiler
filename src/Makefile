@@ -1,11 +1,11 @@
 CC=gcc
 CFLAGS=-Wall -O0 -ggdb
-OBJECTS= parser.o scanner.o compiler.o
+OBJECTS= util.o parser.o scanner.o compiler.o
 
 all: compiler
 
 yacc:
-	bison -d parser.y
+	yacc -d parser.y
 
 lex: yacc
 	flex scanner.l
@@ -14,10 +14,10 @@ lex: yacc
 	$(CC) $(CFLAGS) -o $@ $@.c
 
 compiler: lex $(OBJECTS)
-	$(CC) -c -o $@ *.o
+	$(CC) -o $@ $(OBJECTS)
 
 clean:
-	rm -f *.o scanner.[ch] parser.tab.?
+	rm -f *.o scanner.[ch] y.tab.?
 
 distclean: clean
 	rm compiler
