@@ -38,3 +38,5 @@ number  0|[1-9][0-9]*
 {number}      { yylval = new_token(); yylval->attr.val = atoi(yytext); return NUM; }
 {identifier}  { yylval = new_token(); yylval->attr.name = strdup(yytext); return ID; }
 {ws}          /* ignore */;
+.	printf("bad input character '%s' at line %d\n", yytext, yylineno);
+
