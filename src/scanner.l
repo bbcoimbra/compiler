@@ -1,4 +1,4 @@
-%option   8bit bison-bridge
+%option   8bit
 %option   warn nodefault
 %option   yylineno
 %option   outfile="scanner.c" header-file="scanner.h"
