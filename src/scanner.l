@@ -9,7 +9,7 @@
 %}
 
 ws  [[:blank:]\n]*
-identifier  [:alpha:][:alnum:]*
+identifier  [[:alpha:]][[:alnum:]]*
 number  0|[1-9][0-9]*
 
 %%
