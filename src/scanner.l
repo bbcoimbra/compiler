@@ -5,7 +5,8 @@
 
 %{
 #include <string.h>
-#include "parser.tab.h"
+#include "global.h"
+#include "y.tab.h"
 %}
 
 ws  [[:blank:]\n]*
