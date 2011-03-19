@@ -167,7 +167,7 @@ factor	: LPAREN expr RPAREN {$$ = $1;}
 				| ID
 					{ $$ = new_expr_node(id_k);
 						$$->attr.name = strdup(yytext);
-						$$->lineno = lineno;
+						$$->lineno = yylineno;
 					}
 				| NUM	{$$ = (int) $1;}
 				;
