@@ -10,7 +10,7 @@
 #define YYDEBUG 1
 
 typedef enum {stmt_k, expr_k} node_kind;
-typedef enum {if_k, while_k, assign_k, write_k, read_k} stmt_kind;
+typedef enum {if_k, while_k, attrib_k, write_k, read_k} stmt_kind;
 typedef enum {op_k, id_k} exp_kind;
 typedef enum {Void, Integer, Boolean} exp_type;
 
