@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include "global.h"
 #include "scanner.h"
-static NodeTree * ast;
 %}
 
 %token AND ATTR ELSE END EQ GE GT ID IF LE LPAREN LT ;

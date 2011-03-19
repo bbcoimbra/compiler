@@ -33,6 +33,8 @@ typedef struct tree_node {
 #  define YYSTYPE TreeNode
 # endif
 
+static TreeNode *ast;
+
 # endif
 
 #endif /* _GLOBAL_H_ */
