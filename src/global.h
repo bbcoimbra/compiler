@@ -30,7 +30,9 @@ typedef struct tree_node {
 } TreeNode;
 
 # ifndef YYSTYPE
-#  define YYSTYPE TreeNode *
+#  define YYSTYPE TreeNode
+# endif
+
 # endif
 
 #endif /* _GLOBAL_H_ */
