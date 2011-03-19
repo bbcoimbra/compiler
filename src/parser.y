@@ -19,7 +19,7 @@
 
 %%
 
-prg	: stmts		{ast = $1}
+prg	: stmts		{ast = $1;}
     ;
 
 stmts	: stmt SEMI stmts
@@ -160,16 +160,16 @@ term	: term TIMES factor
 					$$->child[1] = $3;
 					$$->attr.op = OVER;
 				}
-			| factor{$$ = $1}
+			| factor{$$ = $1;}
 			;
 
-factor	: LPAREN expr RPAREN {$$ = $1}
+factor	: LPAREN expr RPAREN {$$ = $1;}
 				| ID
 					{ $$ = new_expr_node(id_k);
 						$$->attr.name = strdup(yytext);
 						$$->lineno = lineno;
 					}
-				| NUM	{$$ = (int) $1}
+				| NUM	{$$ = (int) $1;}
 				;
 %%
 
