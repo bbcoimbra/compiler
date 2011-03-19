@@ -6,8 +6,8 @@
 %{
 #include <string.h>
 #include "global.h"
+#include "util.h"
 #include "y.tab.h"
-TreeNode * new_token(void); 
 %}
 
 ws  [[:blank:]\n]*
@@ -47,8 +47,4 @@ number  0|[1-9][0-9]*
 
 int yywrap (void) {return 1;}
 
-TreeNode * new_token(void) {
-	TreeNode * n = (TreeNode *) malloc(sizeof(TreeNode));
-	return n;
-}
 

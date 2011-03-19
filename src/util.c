@@ -1,5 +1,10 @@
 #include "util.h"
 
+TreeNode * new_token(void) {
+	TreeNode * n = (TreeNode *) malloc(sizeof(TreeNode));
+	return n;
+}
+
 TreeNode * new_expr_node(int kind)
 {
 	TreeNode * n = (TreeNode *) malloc(sizeof(TreeNode));
