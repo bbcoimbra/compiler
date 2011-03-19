@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include "global.h"
 #include "scanner.h"
-
-#define YYSTYPE TreeNode *
 static NodeTree * ast;
 %}
 
