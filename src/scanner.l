@@ -1,14 +1,14 @@
-%option   8bit
-%option   warn nodefault
-%option   yylineno
-%option   outfile="scanner.c" header-file="scanner.h"
-
 %{
 #include <string.h>
 #include "global.h"
 #include "util.h"
 #include "y.tab.h"
 %}
+
+%option   8bit bison-bridge
+%option   warn nodefault
+%option   yylineno
+%option   outfile="scanner.c" header-file="scanner.h"
 
 ws  [[:blank:]\n]*
 identifier  [[:alpha:]][[:alnum:]]*
