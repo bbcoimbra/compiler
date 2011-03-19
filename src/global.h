@@ -35,6 +35,8 @@ typedef struct tree_node {
 
 static TreeNode *ast;
 
+# ifndef EOF
+#  define EOF 0
 # endif
 
 #endif /* _GLOBAL_H_ */
