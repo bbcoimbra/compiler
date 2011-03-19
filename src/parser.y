@@ -25,10 +25,10 @@ prg	: stmts		{ast = $1;}
 stmts	: stmt SEMI stmts
 				{
 					YYSTYPE n =  $1;
-					if(t != NULL)
+					if(n != NULL)
 					{
-						while(t->next != NULL)
-							t = t->next;
+						while(n->next != NULL)
+							n = n->next;
 					}
 				}
 			| stmt	{ $$ = $1;}
