@@ -24,14 +24,17 @@
 prg	: stmts		{ast = $1;}
     ;
 
-stmts	: stmt SEMI stmts
+stmts	: stmts SEMI stmt
 				{
 					YYSTYPE n =  $1;
 					if(n != NULL)
 					{
 						while(n->next != NULL)
 							n = n->next;
+						n->next = $3;
+						$$ = $1;
 					}
+					else $$ = $3;
 				}
 			| stmt	{ $$ = $1;}
 			;
