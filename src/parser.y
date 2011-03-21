@@ -10,10 +10,12 @@
 %token MINUS NEQ NUM OR OVER PLUS READ RPAREN SEMI TIMES ;
 %token WHILE WRITE ERROR ;
 
-%left LPAREN;
+%left EQ NEQ;
+%left GE GT LE LT;
 %left TIMES OVER;
 %left PLUS MINUS;
-%left GE GT LE LT;
+%left LPAREN;
+%nonassoc ATTR;
 
 %start prg;
 
