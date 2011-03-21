@@ -30,7 +30,7 @@ typedef struct tree_node {
 } TreeNode;
 
 # ifndef YYSTYPE
-#  define YYSTYPE TreeNode
+#  define YYSTYPE TreeNode *
 # endif
 
 static TreeNode *ast;
