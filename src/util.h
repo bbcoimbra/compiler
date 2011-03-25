@@ -4,8 +4,9 @@
 #include <stdlib.h>
 #include "global.h"
 
-TreeNode * new_token(void);
-TreeNode * new_expr_node(int kind);
-TreeNode * new_stmt_node(int kind);
+tree_node * new_token(void);
+tree_node * new_expr_node(int kind);
+tree_node * new_stmt_node(int kind);
+void print_node(tree_node * n);
 
 #endif  /* _UTIL_H_ */
