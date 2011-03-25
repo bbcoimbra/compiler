@@ -10,11 +10,16 @@ extern FILE *yyin;
 int main(int argc, char **argv, char **env)
 {
 	FILE *in;
-	TreeNode * ast;
+	tree_node *ast, *n;
 
-	in = fopen(argv[1], "r");
-	yyin = in;
+	yyin = fopen(argv[1], "r");
 	ast = yyparse();
+	n = ast;
+	while(n = yylex())
+	{
+		print_node(n);
+		n = n->next;
+	}
 
 	return EXIT_SUCCESS;
 
