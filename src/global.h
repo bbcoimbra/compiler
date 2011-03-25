@@ -11,12 +11,12 @@
 
 typedef enum {stmt_k, expr_k} node_kind;
 typedef enum {if_k, while_k, attrib_k, write_k, read_k} stmt_kind;
-typedef enum {op_k, id_k} exp_kind;
+typedef enum {op_k, id_k, const_k} exp_kind;
 typedef enum {Void, Integer, Boolean} exp_type;
 
-typedef struct tree_node {
-	struct tree_node *child[MAX_CHILDREN];
-	struct tree_node *next;
+typedef struct tree_node_t {
+	struct tree_node_t *child[MAX_CHILDREN];
+	struct tree_node_t *next;
 	int lineno;
 	node_kind node_k;
 	union {	stmt_kind stmt;
@@ -27,17 +27,7 @@ typedef struct tree_node {
 		char *name;
 	} attr;
 	exp_type expr_type;
-} TreeNode;
-
-# ifndef YYSTYPE
-#  define YYSTYPE TreeNode *
-# endif
-
-static TreeNode *ast;
-
-# ifndef EOF
-#  define EOF 0
-# endif
+} tree_node;
 
 #endif /* _GLOBAL_H_ */
 

@@ -2,13 +2,25 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "global.h"
-#include "scanner.h"
 #include "util.h"
+#include "scanner.h"
+int yyerror(char *s);
 %}
 
-%token AND ATTR ELSE END EQ GE GT ID IF LE LPAREN LT ;
-%token MINUS NEQ NUM OR OVER PLUS READ RPAREN SEMI TIMES ;
+
+%union {
+	tree_node * node;
+}
+
+%token AND ATTR ELSE END EQ GE GT IF LE LPAREN LT ;
+%token MINUS NEQ OR OVER PLUS READ RPAREN SEMI TIMES ;
 %token WHILE WRITE ERROR ;
+%token <node> NUM;
+%token <node> ID;
+
+%type <node> stmts stmt if_decl while_decl attrib_decl read_decl write_decl;
+%type <node>  bool join equality rel term;
+%type <node> expr factor;
 
 %left EQ NEQ;
 %left GE GT LE LT;
@@ -17,33 +29,30 @@
 %left LPAREN;
 %nonassoc ATTR;
 
-%start prg;
+%start stmts;
 
 %%
 
-prg	: stmts		{ast = $1;}
-    ;
-
-stmts	: stmts SEMI stmt
+stmts	: stmts SEMI stmt SEMI
 				{
-					YYSTYPE n =  $1;
-					if(n != NULL)
+					tree_node * node =  $1;
+					if(node != NULL)
 					{
-						while(n->next != NULL)
-							n = n->next;
-						n->next = $3;
+						while(node->next != NULL)
+							node = node->next;
+						node->next = $3;
 						$$ = $1;
 					}
-					else $$ = $3;
+					else $$ = $1;
 				}
-			| stmt	{ $$ = $1;}
+			| stmt SEMI	{ $$ = $1;}
 			;
 
-stmt		: if_decl		{$$ = $1;}
-			  | while_decl		{$$ = $1;}
-				| attrib_decl SEMI	{$$ = $1;}
-				| read_decl SEMI	{$$ = $1;}
-				| write_decl SEMI	{$$ = $1;}
+stmt		: if_decl	{$$ = $1;}
+			  | while_decl	{$$ = $1;}
+				| attrib_decl	{$$ = $1;}
+				| read_decl	{$$ = $1;}
+				| write_decl	{$$ = $1;}
 				;
 
 if_decl		: IF LPAREN bool RPAREN stmts END
@@ -66,16 +75,26 @@ while_decl	: WHILE LPAREN bool RPAREN stmts END
 							}
 						;
 
-attrib_decl	: ID ATTR expr
+attrib_decl	: ID
+							{ $<node>$ = new_expr_node(id_k);
+								(*$<node>$).attr.name = strdup($1.name);
+							}
+						ATTR expr
 							{ $$ = new_stmt_node(attrib_k);
-								$$->child[0] = $3;
+								$$->child[0] = $4;
 							}
 						;
 
 read_decl: READ ID
+					{ $$ = new_expr_node(id_k);
+						$$->attr.name = strdup($2.name);
+					}
 	  ;
 
 write_decl: WRITE ID
+					{ $$ = new_expr_node(id_k);
+						$$->attr.name = strdup($2.name);
+					}
 	   ;
 
 expr: expr PLUS term
@@ -168,19 +187,20 @@ term	: term TIMES factor
 			| factor{$$ = $1;}
 			;
 
-factor	: LPAREN expr RPAREN {$$ = $1;}
+factor	: LPAREN expr RPAREN {$$ = $2;}
 				| ID
 					{ $$ = new_expr_node(id_k);
-						$$->attr.name = strdup(yytext);
-						$$->lineno = yylineno;
+						$$->attr.name = strdup($1.name);
 					}
-				| NUM	{$$ = (int) $1;}
+				| NUM	{
+							 $$ = new_expr_node(const_k);
+				       $$->attr.val = $1.val;
+							}
 				;
 %%
 
 int yyerror(char *s) {
   printf("syntax error: line %d: %s\n", yylineno, s);
-	yyerrflag = 1;
 	return 0;
 }
 
