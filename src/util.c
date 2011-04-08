@@ -3,15 +3,20 @@
 #include "global.h"
 #include "util.h"
 
-tree_node * new_token(void) {
-	tree_node * n = (tree_node *) malloc(sizeof(tree_node));
-	if(n == NULL){fprintf(stderr, "fatal: out of memory\n"); exit(EXIT_FAILURE);}
-	return n;
+struct token_t * new_token(void) {
+	struct token_t * t = (struct token_t *) malloc(sizeof(struct token_t));
+	if (t == NULL) {fprintf(stderr, "fatal: out of memory\n"); exit(EXIT_FAILURE);}
+	t->type = 0;
+	t->value.num = 0;
+	t->value.name = NULL;
+	return t;
 }
 
-tree_node * new_expr_node(int kind)
+}
+
+struct tree_node_t * new_expr_node(int kind)
 {
-	tree_node * n = (tree_node *) malloc(sizeof(tree_node));
+	struct tree_node_t * n = (struct tree_node_t *) malloc(sizeof(struct tree_node_t));
 	int i;
 
 	for(i=0 ; i<3; i++)
@@ -23,9 +28,9 @@ tree_node * new_expr_node(int kind)
 	return n;
 }
 
-tree_node * new_stmt_node(int kind)
+struct tree_node_t * new_stmt_node(int kind)
 {
-	tree_node *n = (tree_node *) malloc(sizeof(tree_node));
+	struct tree_node_t *n = (struct tree_node_t *) malloc(sizeof(struct tree_node_t));
 	int i;
 
 	for(i=0 ; i<3; i++)
@@ -36,7 +41,7 @@ tree_node * new_stmt_node(int kind)
 	return n;
 }
 
-void print_node(tree_node * n)
+void print_node(struct tree_node_t * n)
 {
 	switch(n->node_k)
 	{
