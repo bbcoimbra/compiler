@@ -36,170 +36,67 @@ int yyerror(char *s);
 
 %%
 
-stmts	: stmts SEMI stmt SEMI
-				{
-					tree_node * node =  $1;
-					if(node != NULL)
-					{
-						while(node->next != NULL)
-							node = node->next;
-						node->next = $3;
-						$$ = $1;
-					}
-					else $$ = $1;
-				}
-			| stmt SEMI	{ $$ = $1;}
-			;
+stmts : stmts SEMI stmt SEMI
+      | stmt SEMI
+      ;
 
-stmt		: if_decl	{$$ = $1;}
-			  | while_decl	{$$ = $1;}
-				| attrib_decl	{$$ = $1;}
-				| read_decl	{$$ = $1;}
-				| write_decl	{$$ = $1;}
-				;
+stmt  : if_decl
+      | while_decl
+      | attrib_decl
+      | read_decl
+      | write_decl
+      ;
 
-if_decl		: IF LPAREN bool RPAREN stmts END
-							{ $$ = new_stmt_node(if_k);
-								$$->child[0] = $3;
-								$$->child[1] = $5;
-							}
-					| IF LPAREN bool RPAREN stmts ELSE stmts END
-							{ $$ = new_stmt_node(if_k);
-								$$->child[0] = $3;
-								$$->child[1] = $5;
-								$$->child[2] = $7;
-							}
-					;
+if_decl  : IF LPAREN bool RPAREN stmts END
+         | IF LPAREN bool RPAREN stmts ELSE stmts END
+         ;
 
-while_decl	: WHILE LPAREN bool RPAREN stmts END
-							{ $$ = new_stmt_node(while_k);
-								$$->child[0] = $3;
-								$$->child[1] = $5;
-							}
-						;
+while_decl : WHILE LPAREN bool RPAREN stmts END
+           ;
 
-attrib_decl	: ID
-							{ $<node>$ = new_expr_node(id_k);
-								(*$<node>$).attr.name = strdup($1.name);
-							}
-						ATTR expr
-							{ $$ = new_stmt_node(attrib_k);
-								$$->child[0] = $4;
-							}
-						;
+attrib_decl : ID ATTR expr
+            ;
 
-read_decl: READ ID
-					{ $$ = new_expr_node(id_k);
-						$$->attr.name = strdup($2.name);
-					}
-	  ;
+read_decl : READ ID
+          ;
 
-write_decl: WRITE ID
-					{ $$ = new_expr_node(id_k);
-						$$->attr.name = strdup($2.name);
-					}
-	   ;
+write_decl : WRITE ID
+           ;
 
-expr: expr PLUS term
-      {	$$ = new_expr_node(op_k);
-				$$->child[0] = $1;
-				$$->child[1] = $3;
-				$$->attr.op = PLUS;
-			}
-		| expr MINUS term
-			{	$$ = new_expr_node(op_k);
-				$$->child[0] = $1;
-				$$->child[1] = $3;
-				$$->attr.op = MINUS;
-			}
-		| term  {$$ = $1;}
-		;
+expr : expr PLUS term
+     | expr MINUS term
+     | term
+     ;
 
-bool	: bool OR join
-				{	$$ = new_expr_node(op_k);
-					$$->child[0] = $1;
-					$$->child[1] = $3;
-					$$->attr.op = OR;
-				}
-			| join  {$$ = $1;}
-			;
+bool : bool OR join
+     | join
+     ;
 
-join	: join AND equality
-				{ $$ = new_expr_node(op_k);
-					$$->child[0] = $1;
-					$$->child[1] = $3;
-					$$->attr.op = AND;
-				}
-			| equality          {$$ = $1;}
-			;
+join : join AND equality
+     | equality
+     ;
 
-equality	: equality EQ rel
-						{	$$ = new_expr_node(op_k);
-							$$->child[0] = $1;
-							$$->child[1] = $3;
-							$$->attr.op = EQ;
-						}
-					| equality NEQ rel
-						{	$$ = new_expr_node(op_k);
-							$$->child[0] = $1;
-							$$->child[1] = $3;
-							$$->attr.op = NEQ;
-						}
-					| rel   {$$ = $1;}
-					;
+equality : equality EQ rel
+         | equality NEQ rel
+         | rel
+         ;
 
-rel	: expr GT expr
-			{	$$ = new_expr_node(op_k);
-				$$->child[0] = $1;
-				$$->child[1] = $3;
-				$$->attr.op = GT;
-			}
-		| expr LT expr
-			{	$$ = new_expr_node(op_k);
-				$$->child[0] = $1;
-				$$->child[1] = $3;
-				$$->attr.op = LT;
-			}
-		| expr GE expr
-			{	$$ = new_expr_node(op_k);
-				$$->child[0] = $1;
-				$$->child[1] = $3;
-				$$->attr.op = GE;
-			}
-		| expr LE expr
-			{	$$ = new_expr_node(op_k);
-				$$->child[0] = $1;
-				$$->child[1] = $3;
-				$$->attr.op = LE;
-			}
-		| expr	{$$ = $1;}
-		;
+rel : expr GT expr
+    | expr LT expr
+    | expr GE expr
+    | expr LE expr
+    | expr
+    ;
 
-term	: term TIMES factor
-				{ $$ = new_expr_node(op_k);
-					$$->child[0] = $1;
-					$$->child[1] = $3;
-					$$->attr.op = TIMES;
-				}
-			| term OVER factor
-				{	$$ = new_expr_node(op_k);
-					$$->child[0] = $1;
-					$$->child[1] = $3;
-					$$->attr.op = OVER;
-				}
-			| factor{$$ = $1;}
-			;
+term : term TIMES factor
+     | term OVER factor
+     | factor
+     ;
 
-factor	: LPAREN expr RPAREN {$$ = $2;}
-				| ID
-					{ $$ = new_expr_node(id_k);
-						$$->attr.name = strdup($1.name);
-					}
-				| NUM	{
-							 $$ = new_expr_node(const_k);
-				       $$->attr.val = $1.val;
-							}
-				;
+factor : LPAREN expr RPAREN
+       | ID
+       | NUM
+       ;
 %%
 
 int yyerror(char *s) {
