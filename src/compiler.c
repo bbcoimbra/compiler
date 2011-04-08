@@ -5,7 +5,7 @@
 #include "parser.h"
 #include "scanner.h"
 
-extern FILE *yyin;
+FILE *yyin;
 
 int main(int argc, char **argv, char **env)
 {
