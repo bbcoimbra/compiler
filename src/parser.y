@@ -7,9 +7,9 @@
 int yyerror(char *s);
 %}
 
-
-%union {
-	tree_node * node;
+%union{
+struct token_t *token;
+struct tree_node_t *node;
 }
 
 %defines "parser.h"
