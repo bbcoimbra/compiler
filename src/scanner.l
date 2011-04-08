@@ -37,8 +37,18 @@ number  0|[1-9][0-9]*
 ";"           return SEMI;
 "("           return LPAREN;
 ")"           return RPAREN;
-{number}      {yylval.num = atoi(yytext); return NUM;}
-{identifier}  {yylval.name = strdup(yytext); return ID; }
+{number}      {
+                yylval->token = new_token();
+                yylval->token->type = NUM;
+                yylval->token->value.num = atoi(yytext);
+                return NUM;
+              }
+{identifier}  {
+                yylval->token = new_token();
+                yylval->token->type = ID;
+                yylval->token->value.name = (char *)strdup(yytext);
+                return ID;
+              }
 {ws}          /* ignore */;
-.	printf("bad input character '%s' at line %d\n", yytext, yylineno);
+.             printf("bad input character '%s' at line %d\n", yytext, yylineno);
 
