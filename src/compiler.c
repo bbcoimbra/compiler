@@ -9,7 +9,7 @@ FILE *yyin;
 
 int main(int argc, char **argv, char **env)
 {
-	tree_node *ast, *n;
+	struct tree_node_t *ast, *n;
 
 	yyin = fopen(argv[1], "r");
 	ast = yyparse();
