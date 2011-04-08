@@ -38,15 +38,15 @@ number  0|[1-9][0-9]*
 "("           return LPAREN;
 ")"           return RPAREN;
 {number}      {
-                yylval->token = new_token();
-                yylval->token->type = NUM;
-                yylval->token->value.num = atoi(yytext);
+                yylval_param->token = new_token();
+                yylval_param->token->type = NUM;
+                yylval_param->token->value.num = atoi(yytext);
                 return NUM;
               }
 {identifier}  {
-                yylval->token = new_token();
-                yylval->token->type = ID;
-                yylval->token->value.name = (char *)strdup(yytext);
+                yylval_param->token = new_token();
+                yylval_param->token->type = ID;
+                yylval_param->token->value.name = (char *)strdup(yytext);
                 return ID;
               }
 {ws}          /* ignore */;
