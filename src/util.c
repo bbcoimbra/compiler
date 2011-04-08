@@ -13,6 +13,85 @@ struct token_t * new_token(void) {
 	return t;
 }
 
+void print_token (int type, struct token_t * t){
+	printf("Token: %d", type);
+	switch (type)
+	{
+		case AND:
+			printf ("(AND)");
+			break;
+		case ATTR:
+			printf ("(ATTR)");
+			break;
+		case ELSE:
+			printf ("(ELSE)");
+			break;
+		case END:
+			printf ("(END)");
+			break;
+		case EQ:
+			printf ("(EQ)");
+			break;
+		case GE:
+			printf ("(GE)");
+			break;
+		case GT:
+			printf ("(GT)");
+			break;
+		case IF:
+			printf ("(IF)");
+			break;
+		case LE:
+			printf ("(LE)");
+			break;
+		case LPAREN:
+			printf ("(LPAREN)");
+			break;
+		case LT:
+			printf ("(LT)");
+			break;
+		case MINUS:
+			printf ("(MINUS)");
+			break;
+		case NEQ:
+			printf ("(NEQ)");
+			break;
+		case OR:
+			printf ("(OR)");
+			break;
+		case OVER:
+			printf ("(OVER)");
+			break;
+		case PLUS:
+			printf ("(PLUS)");
+			break;
+		case READ:
+			printf ("(READ)");
+			break;
+		case RPAREN:
+			printf ("(RPAREN)");
+			break;
+		case SEMI:
+			printf ("(SEMI)");
+			break;
+		case TIMES:
+			printf ("(TIMES)");
+			break;
+		case WHILE:
+			printf ("(WHILE)");
+			break;
+		case WRITE:
+			printf ("(WRITE)");
+			break;
+		case ID:
+			printf (" (ID), Name: %s", t->value.name);
+			break;
+		case NUM:
+			printf (" (NUM), Value: %d", t->value.num);
+			break;
+	}
+	printf("\n");
+	return;
 }
 
 struct tree_node_t * new_expr_node(int kind)
