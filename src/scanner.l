@@ -1,8 +1,8 @@
 %{
+#include "parser.h"
 #include <string.h>
 #include "global.h"
 #include "util.h"
-#include "y.tab.h"
 %}
 
 %option 8bit bison-bridge
