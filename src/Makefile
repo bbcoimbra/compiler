@@ -3,7 +3,7 @@ CFLAGS=-Wall -O0 -ggdb -std=c99
 OBJECTS= util.o parser.o scanner.o
 COMPILER_O= compiler.o
 
-all:	scanner_tester
+all:	compiler
 
 yacc:
 	yacc -d parser.y
