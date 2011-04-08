@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include "global.h"
 #include "parser.h"
-#include "scanner.h"
 
 FILE *yyin;
 
