@@ -14,12 +14,6 @@ int main(int argc, char **argv, char **env)
 
 	yyin = fopen(argv[1], "r");
 	ast = yyparse();
-	n = ast;
-	while(n = yylex())
-	{
-		print_node(n);
-		n = n->next;
-	}
 
 	return EXIT_SUCCESS;
 
