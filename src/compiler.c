@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "global.h"
+#include "parser.h"
 #include "scanner.h"
-#include "y.tab.h"
 
 extern FILE *yyin;
 
