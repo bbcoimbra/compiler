@@ -7,10 +7,10 @@
 #define YYSTYPE tree_node *
 %}
 
-%option		bison-bridge
-%option   8bit warn
-%option   warn nodefault
-%option   outfile="scanner.c" header-file="scanner.h"
+%option 8bit bison-bridge
+%option warn nodefault
+%option yylineno noyywrap
+%option outfile="scanner.c" header-file="scanner.h"
 
 ws  [[:blank:]\n]*
 identifier  [[:alpha:]][[:alnum:]]*
