@@ -12,6 +12,9 @@ int yyerror(char *s);
 	tree_node * node;
 }
 
+%defines "parser.h"
+%output "parser.c"
+
 %token AND ATTR ELSE END EQ GE GT IF LE LPAREN LT ;
 %token MINUS NEQ OR OVER PLUS READ RPAREN SEMI TIMES ;
 %token WHILE WRITE ERROR ;
