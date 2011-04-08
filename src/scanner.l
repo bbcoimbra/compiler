@@ -3,8 +3,6 @@
 #include "global.h"
 #include "util.h"
 #include "y.tab.h"
-
-#define YYSTYPE tree_node *
 %}
 
 %option 8bit bison-bridge
