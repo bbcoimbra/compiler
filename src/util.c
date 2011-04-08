@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "global.h"
 #include "util.h"
+#include "parser.h"
 
 struct token_t * new_token(void) {
 	struct token_t * t = (struct token_t *) malloc(sizeof(struct token_t));
