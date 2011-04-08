@@ -4,9 +4,6 @@
 #include <stdio.h>
 #include "global.h"
 #include "util.h"
-#include "scanner.h"
-void yyerror(char *s);
-int yydebug = 1;
 %}
 
 %union{
@@ -31,6 +28,13 @@ struct tree_node_t *node;
 %nonassoc ATTR;
 
 %start stmts;
+
+%{
+#include "scanner.h"
+#define YYLEX_PARAM yylval_param
+void yyerror(char *s);
+int yydebug = 1;
+%}
 
 %%
 
