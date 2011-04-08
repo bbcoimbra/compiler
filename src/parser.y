@@ -1,10 +1,12 @@
 %{
+#define YYDEBUG 1
 #include <stdlib.h>
 #include <stdio.h>
 #include "global.h"
 #include "util.h"
 #include "scanner.h"
 void yyerror(char *s);
+int yydebug = 1;
 %}
 
 %union{
