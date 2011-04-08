@@ -17,13 +17,9 @@ int yyerror(char *s);
 
 %token AND ATTR ELSE END EQ GE GT IF LE LPAREN LT ;
 %token MINUS NEQ OR OVER PLUS READ RPAREN SEMI TIMES ;
-%token WHILE WRITE ERROR ;
-%token <node> NUM;
-%token <node> ID;
-
-%type <node> stmts stmt if_decl while_decl attrib_decl read_decl write_decl;
-%type <node>  bool join equality rel term;
-%type <node> expr factor;
+%token WHILE WRITE ;
+%token NUM;
+%token ID;
 
 %left EQ NEQ;
 %left GE GT LE LT;
