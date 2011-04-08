@@ -95,8 +95,8 @@ factor : LPAREN expr RPAREN
        ;
 %%
 
-int yyerror(char *s) {
-  printf("syntax error: line %d: %s\n", yylineno, s);
-	return 0;
+void yyerror(char *s) {
+  printf("syntax error: %s\n", s);
+  return;
 }
 
