@@ -4,7 +4,7 @@
 #include "global.h"
 #include "util.h"
 #include "scanner.h"
-int yyerror(char *s);
+void yyerror(char *s);
 %}
 
 %union{
