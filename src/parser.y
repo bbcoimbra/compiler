@@ -38,15 +38,15 @@ int yydebug = 1;
 
 %%
 
-stmts : stmts SEMI stmt SEMI
-      | stmt SEMI
+stmts : stmts stmt
+      | stmt
       ;
 
-stmt  : if_decl
-      | while_decl
-      | attrib_decl
-      | read_decl
-      | write_decl
+stmt  : if_decl SEMI
+      | while_decl SEMI
+      | attrib_decl SEMI
+      | read_decl SEMI
+      | write_decl SEMI
       ;
 
 if_decl  : IF LPAREN bool RPAREN stmts END
