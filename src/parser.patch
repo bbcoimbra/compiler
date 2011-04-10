@@ -1,0 +1,10 @@
+--- parser.c	2011-04-09 23:46:33.193379996 -0300
++++ parser.c.old	2011-04-09 23:45:29.745380003 -0300
+@@ -1362,6 +1362,7 @@
+   /* YYCHAR is either YYEMPTY or YYEOF or a valid lookahead symbol.  */
+   if (yychar == YYEMPTY)
+     {
++      union YYSTYPE *yylval_param = (union YYSTYPE *)malloc(sizeof(union YYSTYPE));
+       YYDPRINTF ((stderr, "Reading a token: "));
+       yychar = YYLEX;
+     }
