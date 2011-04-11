@@ -103,7 +103,7 @@ struct tree_node_t * new_expr_node(int kind)
 		n->child[i] = NULL;
 	n->next = NULL;
 	n->lineno = 0;
-	n->node_k = kind;
+	n->node_kind = kind;
 	n->attr.name = NULL;
 	return n;
 }
@@ -117,13 +117,13 @@ struct tree_node_t * new_stmt_node(int kind)
 		n->child[i] = NULL;
 	n->next = NULL;
 	n->lineno = 0;
-	n->node_k = kind;
+	n->node_kind = kind;
 	return n;
 }
 
 void print_node(struct tree_node_t * n)
 {
-	switch(n->node_k)
+	switch(n->node_kind)
 	{
 		case stmt_k:
 			printf("Stament\n");
