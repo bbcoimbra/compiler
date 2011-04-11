@@ -65,34 +65,23 @@ read_decl : READ ID
 write_decl : WRITE ID
            ;
 
-expr : expr PLUS term
-     | expr MINUS term
-     | term
-     ;
-
-bool : bool OR join
-     | join
-     ;
-
-join : join AND equality
-     | equality
-     ;
-
-equality : equality EQ rel
-         | equality NEQ rel
-         | rel
-         ;
-
-rel : expr GT expr
-    | expr LT expr
-    | expr GE expr
-    | expr LE expr
-    | expr
-    ;
-
-term : term TIMES factor
-     | term OVER factor
+expr : expr PLUS expr
+     | expr MINUS expr
+     | expr TIMES expr
+     | expr OVER expr
      | factor
+     | bool
+     ;
+
+bool : expr OR expr
+     | expr AND expr
+     | expr EQ expr
+     | expr NEQ expr
+     | expr GT expr
+     | expr LT expr
+     | expr GE expr
+     | expr LE expr
+     | expr
      ;
 
 factor : LPAREN expr RPAREN
