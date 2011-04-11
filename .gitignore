@@ -1,0 +1,6 @@
+src/scanner.[ch]
+src/parser.[ch]
+*.output
+*.orig
+*.o
+compiler
