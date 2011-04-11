@@ -8,7 +8,7 @@ FILE *yyin;
 
 int main(int argc, char **argv, char **env)
 {
-	struct tree_node_t *ast, *n;
+	struct tree_node_t *ast;
 
 	yyin = fopen(argv[1], "r");
 	ast = yyparse();
