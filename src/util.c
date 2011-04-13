@@ -23,7 +23,8 @@ struct node_t * new_expr_node(enum expr_kind kind)
 		n->child[i] = NULL;
 	n->next = NULL;
 	n->lineno = 0;
-	n->kind = kind;
+	n->kind = expr_k;
+	n->type.expr = kind;
 	n->attr.name = NULL;
 	return n;
 }
@@ -37,7 +38,8 @@ struct node_t * new_stmt_node(enum stmt_kind kind)
 		n->child[i] = NULL;
 	n->next = NULL;
 	n->lineno = 0;
-	n->kind = kind;
+	n->kind = stmt_k;
+	n->type.stmt = kind;
 	return n;
 }
 
