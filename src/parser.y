@@ -8,7 +8,6 @@ int yylex(void);
 void yyerror(char const *, ...);
 
 char * saved_name;
-struct tree_node_t * ast;
 %}
 
 %union{
@@ -20,6 +19,7 @@ struct tree_node_t *node;
 
 %defines "parser.h"
 %output "parser.c"
+%parse-param {struct tree_node_t * ast}
 
 %token AND ATTR ELSE END EQ GE GT IF LE LPAREN LT ;
 %token MINUS NEQ OR OVER PLUS READ RPAREN SEMI TIMES ;
