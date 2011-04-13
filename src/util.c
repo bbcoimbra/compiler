@@ -45,10 +45,24 @@ struct node_t * new_stmt_node(enum stmt_kind kind)
 
 void print_node(struct node_t * node)
 {
-	switch(node->kind)
+	if (node == NULL)
+		return;
+	switch (node->kind)
 	{
 		case stmt_k:
-			printf("Stament\n");
+			printf("Stament: ");
+			switch (node->type.expr)
+			{
+				case if_k:
+					printf("IF\n");
+					break;
+				case write_k:
+					printf("WRITE\n");
+					break;
+				case attrib_k:
+					printf("ATTRIB\n");
+					break;
+			}
 			break;
 		case expr_k:
 			printf("Expression\n");
