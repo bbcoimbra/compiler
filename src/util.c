@@ -68,9 +68,13 @@ char * copy_str (char * str)
 
 void print_tree (struct node_t * n)
 {
+	int i = 0;
+
 	if (n != NULL)
 	{
 		print_node(n);
+		for (i = 0 ; i < MAX_CHILDREN ; i++)
+			print_tree(n->child[i]);
 		if (n->next != NULL)
 			print_tree(n->next);
 	}
