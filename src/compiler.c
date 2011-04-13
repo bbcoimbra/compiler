@@ -17,6 +17,7 @@ int main(int argc, char **argv, char **env)
 		fprintf(stderr, "Compilation failure!\n");
 		exit(EXIT_FAILURE);
 	}
+	print_tree(ast);
 
 	return EXIT_SUCCESS;
 
