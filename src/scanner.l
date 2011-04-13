@@ -3,9 +3,10 @@
 #include <string.h>
 #include "global.h"
 #include "util.h"
+extern YYSTYPE yylval;
 %}
 
-%option 8bit bison-bridge
+%option 8bit
 %option warn nodefault
 %option yylineno noyywrap
 %option outfile="scanner.c" header-file="scanner.h"
@@ -38,15 +39,11 @@ number  0|[1-9][0-9]*
 "("           return LPAREN;
 ")"           return RPAREN;
 {number}      {
-                yylval_param->token = new_token();
-                yylval_param->token->type = NUM;
-                yylval_param->token->value.num = atoi(yytext);
+                yylval.val = atoi(yytext);
                 return NUM;
               }
 {identifier}  {
-                yylval_param->token = new_token();
-                yylval_param->token->type = ID;
-                yylval_param->token->value.name = (char *)strdup(yytext);
+                yylval.name = copy_str (yytext);
                 return ID;
               }
 {ws}          /* ignore */;

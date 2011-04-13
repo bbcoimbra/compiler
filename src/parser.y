@@ -1,16 +1,21 @@
 %{
-#define YYDEBUG 1
 #include <stdlib.h>
 #include <stdio.h>
 #include "global.h"
 #include "util.h"
+
+int yylex(void);
+void yyerror(char const *, ...);
+
+char * saved_name;
+struct tree_node_t * ast;
 %}
 
 %union{
+int val;
+char * name;
 struct token_t *token;
 struct tree_node_t *node;
-char *str;
-int   val;
 }
 
 %defines "parser.h"
@@ -18,10 +23,9 @@ int   val;
 
 %token AND ATTR ELSE END EQ GE GT IF LE LPAREN LT ;
 %token MINUS NEQ OR OVER PLUS READ RPAREN SEMI TIMES ;
-%token WHILE WRITE NUM ID;
-
-%type <val> NUM;
-%type <str> ID;
+%token WHILE WRITE;
+%token <val> NUM;
+%token <name> ID;
 
 %type <node> stmts stmt while_decl if_decl attrib_decl write_decl read_decl;
 %type <node> bool expr factor;
@@ -32,15 +36,6 @@ int   val;
 %left PLUS MINUS;
 %left LPAREN;
 %nonassoc ATTR;
-
-%{
-#include "scanner.h"
-#define YYLEX_PARAM yylval_param
-void yyerror(char *s);
-int yydebug = 1;
-struct tree_node_t * ast;
-char *saved_name;
-%}
 
 %%
 
@@ -100,7 +95,7 @@ while_decl : WHILE LPAREN bool RPAREN stmts END
            ;
 
 attrib_decl : ID
-            { saved_name = strdup($1); }
+            { saved_name = copy_str (yylval.name); }
             ATTR expr
             {
               $$ = new_stmt_node(attrib_k);
@@ -112,7 +107,7 @@ attrib_decl : ID
 read_decl : READ ID
           {
             $$ = new_stmt_node(read_k);
-            $$->child[0] = strdup($2);
+            $$->child[0] = $2;
           }
           ;
 
@@ -220,19 +215,19 @@ bool : expr OR expr
 factor : LPAREN expr RPAREN
        { $$ = $2; }
        | ID
-       {
-         $$ = new_expr_node(id_k);
-         $$->attr.name = strdup(yylval->value.name);
-       }
+         {
+           $$ = new_expr_node(id_k);
+           $$->attr.name = copy_str (yylval.name);
+         }
        | NUM
-       {
-         $$ = new_expr_node(const_k);
-         $$->attr.val = yylval->value.num;
-       }
+         {
+           $$ = new_expr_node(const_k);
+           $$->attr.val = yylval.val;
+         }
        ;
 %%
 
-void yyerror(char *s) {
+void yyerror(char const *s, ...) {
   printf("syntax error: %s\n", s);
   return;
 }
