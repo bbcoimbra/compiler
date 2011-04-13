@@ -3,7 +3,6 @@
 
 #define MAX_CHILDREN 3
 
-typedef enum {Void, Integer, Boolean} expr_t;
 enum node_kind {stmt_k, expr_k};
 enum stmt_kind {if_k, while_k, attrib_k, write_k, read_k};
 enum expr_kind {op_k, id_k, const_k};
@@ -30,7 +29,6 @@ struct node_t {
     int val;
     char *name;
   } attr;
-  expr_t exp_type;
 };
 
 #endif /* _GLOBAL_H_ */
