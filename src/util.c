@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "global.h"
 #include "util.h"
 #include "parser.h"
@@ -134,3 +135,15 @@ void print_node(struct tree_node_t * n)
 	}
 	return;
 }
+
+char * copy_str (char * str)
+{
+	char * aux;
+	int len = 0;
+	len = strlen(str) + 1;
+	aux = (char *) malloc (len);
+	memset(aux, 0, len);
+	memcpy(aux, str, len - 1);
+	return aux;
+}
+

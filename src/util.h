@@ -8,5 +8,6 @@ struct tree_node_t * new_expr_node (int kind);
 struct tree_node_t * new_stmt_node (int kind);
 void print_node (struct tree_node_t * n);
 
+char *copy_str(char * str);
 
 #endif  /* _UTIL_H_ */
