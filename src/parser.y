@@ -47,10 +47,10 @@ stmts : stmts stmt
          struct node_t *t = $1;
          if (t != NULL)
          {
-          while (t->next != NULL)
-            t = t->next;
-          t->next = $2;
-          $$ = $1;
+           while (t->next != NULL)
+             t = t->next;
+           t->next = $2;
+           $$ = $1;
          }
          else
           $$ = $2;
