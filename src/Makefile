@@ -7,7 +7,6 @@ all:	compiler
 
 yacc:
 	yacc -d parser.y
-	patch -p0 < parser.patch
 
 lex: yacc
 	flex scanner.l
