@@ -22,7 +22,7 @@ struct node_t {
   enum node_kind kind;
   union {
     enum stmt_kind stmt;
-    enum expr_kind exp;
+    enum expr_kind expr;
   } type;
   union {
     int op;
