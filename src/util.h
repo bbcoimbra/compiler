@@ -2,7 +2,6 @@
 #define _UTIL_H_
 
 struct token_t * new_token (void);
-void print_token (int type, struct token_t * t);
 
 struct node_t * new_expr_node (enum expr_kind kind);
 struct node_t * new_stmt_node (enum stmt_kind kind);
