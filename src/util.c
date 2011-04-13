@@ -147,3 +147,14 @@ char * copy_str (char * str)
 	return aux;
 }
 
+void print_tree (struct tree_node_t * n)
+{
+	if (n != NULL)
+	{
+		print_node(n);
+		if (n->next != NULL)
+			print_tree(n->next);
+	}
+	return;
+}
+
