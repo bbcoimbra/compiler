@@ -95,36 +95,36 @@ void print_token (int type, struct token_t * t){
 	return;
 }
 
-struct tree_node_t * new_expr_node(int kind)
+struct node_t * new_expr_node(enum expr_kind kind)
 {
-	struct tree_node_t * n = (struct tree_node_t *) malloc(sizeof(struct tree_node_t));
+	struct node_t * n = (struct node_t *) malloc (sizeof (struct node_t));
 	int i;
 
 	for(i=0 ; i<3; i++)
 		n->child[i] = NULL;
 	n->next = NULL;
 	n->lineno = 0;
-	n->node_kind = kind;
+	n->kind = kind;
 	n->attr.name = NULL;
 	return n;
 }
 
-struct tree_node_t * new_stmt_node(int kind)
+struct node_t * new_stmt_node(enum stmt_kind kind)
 {
-	struct tree_node_t *n = (struct tree_node_t *) malloc(sizeof(struct tree_node_t));
+	struct node_t *n = (struct node_t *) malloc(sizeof(struct node_t));
 	int i;
 
 	for(i=0 ; i<3; i++)
 		n->child[i] = NULL;
 	n->next = NULL;
 	n->lineno = 0;
-	n->node_kind = kind;
+	n->kind = kind;
 	return n;
 }
 
-void print_node(struct tree_node_t * n)
+void print_node(struct node_t * node)
 {
-	switch(n->node_kind)
+	switch(node->kind)
 	{
 		case stmt_k:
 			printf("Stament\n");
@@ -147,7 +147,7 @@ char * copy_str (char * str)
 	return aux;
 }
 
-void print_tree (struct tree_node_t * n)
+void print_tree (struct node_t * n)
 {
 	if (n != NULL)
 	{

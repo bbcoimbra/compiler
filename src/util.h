@@ -4,10 +4,10 @@
 struct token_t * new_token (void);
 void print_token (int type, struct token_t * t);
 
-struct tree_node_t * new_expr_node (int kind);
-struct tree_node_t * new_stmt_node (int kind);
-void print_node (struct tree_node_t * n);
-void print_tree (struct tree_node_t * n);
+struct node_t * new_expr_node (enum expr_kind kind);
+struct node_t * new_stmt_node (enum stmt_kind kind);
+void print_node (struct node_t * node);
+void print_tree (struct node_t * n);
 
 char *copy_str(char * str);
 

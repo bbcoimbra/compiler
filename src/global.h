@@ -3,10 +3,10 @@
 
 #define MAX_CHILDREN 3
 
-typedef enum {stmt_k, expr_k} node_k;
-typedef enum {if_k, while_k, attrib_k, write_k, read_k} stmt_kind;
-typedef enum {op_k, id_k, const_k} expr_kind;
 typedef enum {Void, Integer, Boolean} expr_t;
+enum node_kind {stmt_k, expr_k};
+enum stmt_kind {if_k, while_k, attrib_k, write_k, read_k};
+enum expr_kind {op_k, id_k, const_k};
 
 struct token_t {
   int type;
@@ -16,15 +16,15 @@ struct token_t {
   } value;
 };
 
-struct tree_node_t {
-  struct tree_node_t *child[MAX_CHILDREN];
-  struct tree_node_t *next;
+struct node_t {
+  struct node_t *child[MAX_CHILDREN];
+  struct node_t *next;
   int lineno;
-  node_k node_kind;
+  enum node_kind kind;
   union {
-    stmt_kind stmt;
-    expr_kind exp;
-  } kind;
+    enum stmt_kind stmt;
+    enum expr_kind exp;
+  } type;
   union {
     int op;
     int val;

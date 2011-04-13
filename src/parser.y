@@ -5,7 +5,7 @@
 #include "util.h"
 
 int yylex(void);
-void yyerror(char const *, ...);
+void yyerror(struct node_t *, ...);
 
 char * saved_name;
 %}
@@ -14,12 +14,12 @@ char * saved_name;
 int val;
 char * name;
 struct token_t *token;
-struct tree_node_t *node;
+struct node_t *node;
 }
 
 %defines "parser.h"
 %output "parser.c"
-%parse-param {struct tree_node_t * ast}
+%parse-param {struct node_t * ast}
 
 %token AND ATTR ELSE END EQ GE GT IF LE LPAREN LT ;
 %token MINUS NEQ OR OVER PLUS READ RPAREN SEMI TIMES ;
@@ -44,7 +44,7 @@ program : stmts { ast = $1; }
 
 stmts : stmts stmt
        {
-         struct tree_node_t *t = $1;
+         struct node_t *t = $1;
          if (t != NULL)
          {
           while (t->next != NULL)
@@ -227,7 +227,7 @@ factor : LPAREN expr RPAREN
        ;
 %%
 
-void yyerror(char const *s, ...) {
+void yyerror(struct node_t *s, ...) {
   printf("syntax error: %s\n", s);
   return;
 }
