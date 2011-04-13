@@ -19,7 +19,6 @@ struct node_t *node;
 
 %defines "parser.h"
 %output "parser.c"
-%parse-param {struct node_t * ast}
 
 %token AND ATTR ELSE END EQ GE GT IF LE LPAREN LT ;
 %token MINUS NEQ OR OVER PLUS READ RPAREN SEMI TIMES ;

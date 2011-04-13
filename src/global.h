@@ -31,5 +31,7 @@ struct node_t {
   } attr;
 };
 
+struct node_t * ast;
+
 #endif /* _GLOBAL_H_ */
 
