@@ -134,7 +134,9 @@ void print_tree (struct node_t * node)
 		for (i = 0 ; i < MAX_CHILDREN ; i++)
 			if (node->child[i])
 			{
+				indent_level++;
 				print_tree(node->child[i]);
+				indent_level--;
 			}
 		if (node->next != NULL)
 			print_tree(node->next);
