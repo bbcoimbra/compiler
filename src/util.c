@@ -47,6 +47,11 @@ struct node_t * new_stmt_node(enum stmt_kind kind)
 
 void print_node(struct node_t * node)
 {
+	int i;
+
+	for (i = 0 ; i < indent_level ; i++)
+		printf("  ");
+
 	if (node == NULL)
 		return;
 	switch (node->kind)
