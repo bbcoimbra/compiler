@@ -5,6 +5,8 @@
 #include "util.h"
 #include "parser.h"
 
+static int indent_level = 0;
+
 struct token_t * new_token(void) {
 	struct token_t * t = (struct token_t *) malloc(sizeof(struct token_t));
 	if (t == NULL) {fprintf(stderr, "fatal: out of memory\n"); exit(EXIT_FAILURE);}
