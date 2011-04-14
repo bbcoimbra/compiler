@@ -124,17 +124,20 @@ char * copy_str (char * str)
 	return aux;
 }
 
-void print_tree (struct node_t * n)
+void print_tree (struct node_t * node)
 {
 	int i = 0;
 
-	if (n != NULL)
+	if (node != NULL)
 	{
-		print_node(n);
+		print_node(node);
 		for (i = 0 ; i < MAX_CHILDREN ; i++)
-			print_tree(n->child[i]);
-		if (n->next != NULL)
-			print_tree(n->next);
+			if (node->child[i])
+			{
+				print_tree(node->child[i]);
+			}
+		if (node->next != NULL)
+			print_tree(node->next);
 	}
 	return;
 }
