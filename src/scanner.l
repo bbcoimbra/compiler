@@ -17,14 +17,14 @@ number  0|[1-9][0-9]*
 
 %%
 
-"and"         return AND;
-"or"          return OR;
-"if"          return IF;
-"else"        return ELSE;
-"while"       return WHILE;
-"read"        return READ;
-"write"       return WRITE;
-"end"         return END;
+"e"           return AND;
+"ou"          return OR;
+"se"          return IF;
+"senao"       return ELSE;
+"enquanto"    return WHILE;
+"leia"        return READ;
+"escreva"     return WRITE;
+"fim"         return END;
 "=="          return EQ;
 "!="          return NEQ;
 "="           return ATTR;
