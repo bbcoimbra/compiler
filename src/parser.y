@@ -5,7 +5,7 @@
 #include "util.h"
 
 int yylex(void);
-void yyerror(struct node_t *, ...);
+void yyerror(const char *, ...);
 
 char * saved_name;
 %}
@@ -226,7 +226,7 @@ factor : LPAREN expr RPAREN
        ;
 %%
 
-void yyerror(struct node_t *s, ...) {
+void yyerror(const char * s, ...) {
   printf("syntax error: %s\n", s);
   return;
 }
