@@ -82,6 +82,10 @@ void print_node(struct node_t * node)
 					printf("OP: ");
 					switch (node->attr.op)
 					{
+						case AND:
+							printf("&&"); break;
+						case OR:
+							printf("||"); break;
 						case EQ:
 							printf("=="); break;
 						case NEQ:
