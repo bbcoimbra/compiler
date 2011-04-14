@@ -106,14 +106,16 @@ attrib_decl : ID
 read_decl : READ ID
           {
             $$ = new_stmt_node(read_k);
-            $$->child[0] = $2;
+            $$->child[0] = new_expr_node(id_k);
+            $$->child[0]->attr.name = copy_str (yylval.name);
           }
           ;
 
 write_decl : WRITE ID
            {
             $$ = new_stmt_node(write_k);
-            $$->child[0] = $2;
+            $$->child[0] = new_expr_node(id_k);
+            $$->child[0]->attr.name = copy_str (yylval.name);
            }
            ;
 
