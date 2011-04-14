@@ -58,21 +58,56 @@ void print_node(struct node_t * node)
 	{
 		case stmt_k:
 			printf("Stament: ");
-			switch (node->type.expr)
+			switch (node->type.stmt)
 			{
 				case if_k:
-					printf("IF\n");
-					break;
+					printf("IF\n"); break;
 				case write_k:
-					printf("WRITE\n");
-					break;
+					printf("WRITE\n"); break;
 				case attrib_k:
-					printf("ATTRIB\n");
-					break;
+					printf("ATTRIB to %s\n", node->attr.name); break;
+				case while_k:
+					printf("WHILE\n"); break;
+				case read_k:
+					printf("READ\n"); break;
 			}
 			break;
 		case expr_k:
-			printf("Expression\n");
+			printf("Expression: ");
+			switch (node->type.expr)
+			{
+				case id_k:
+					printf("ID: %s\n", node->attr.name); break;
+				case op_k:
+					printf("OP: ");
+					switch (node->attr.op)
+					{
+						case EQ:
+							printf("=="); break;
+						case NEQ:
+							printf("!="); break;
+						case GE:
+							printf(">="); break;
+						case GT:
+							printf(">"); break;
+						case LE:
+							printf("<="); break;
+						case LT:
+							printf("<"); break;
+						case PLUS:
+							printf("+"); break;
+						case MINUS:
+							printf("-"); break;
+						case TIMES:
+							printf("*"); break;
+						case OVER:
+							printf("/"); break;
+					}
+					printf("\n");
+					break;
+				case const_k:
+					printf("NUM: %d\n", node->attr.val); break;
+			}
 			break;
 	}
 	return;
