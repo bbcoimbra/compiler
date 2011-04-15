@@ -7,15 +7,6 @@
 
 static int indent_level = 0;
 
-struct token_t * new_token(void) {
-	struct token_t * t = (struct token_t *) malloc(sizeof(struct token_t));
-	if (t == NULL) {fprintf(stderr, "fatal: out of memory\n"); exit(EXIT_FAILURE);}
-	t->type = 0;
-	t->value.num = 0;
-	t->value.name = NULL;
-	return t;
-}
-
 struct node_t * new_expr_node(enum expr_kind kind)
 {
 	struct node_t * n = (struct node_t *) malloc (sizeof (struct node_t));
