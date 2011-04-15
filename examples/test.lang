@@ -1,10 +1,21 @@
-x = 10;
-y = 20;
+leia x;
+leia y;
+z = 0;
 se (x > 5)
-	y = 30;
+	leia y;
 fim;
 enquanto (x < y)
-	leia z;
-	escreva y;
+  se (x == y)
+		leia z;
+		escreva y;
+	senao
+		enquanto (z >= y)
+			leia z;
+			escreva x;
+	fim;
 fim;
+
+escreva x;
+escreva y;
+escreva z;
 
