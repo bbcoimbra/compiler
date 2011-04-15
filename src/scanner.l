@@ -9,7 +9,6 @@ extern YYSTYPE yylval;
 %option 8bit
 %option warn nodefault
 %option yylineno noyywrap
-%option outfile="scanner.c" header-file="scanner.h"
 
 ws  [[:blank:]\n]*
 identifier  [[:alpha:]][[:alnum:]]*
