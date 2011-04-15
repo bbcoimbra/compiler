@@ -1,5 +1,5 @@
 %{
-#include "parser.h"
+#include "compiler-parser.h"
 #include <string.h>
 #include "global.h"
 #include "util.h"
