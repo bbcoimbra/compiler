@@ -12,6 +12,7 @@ enquanto (x < y)
 		enquanto (z >= y)
 			leia z;
 			escreva x;
+		fim;
 	fim;
 fim;
 
