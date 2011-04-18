@@ -3,6 +3,7 @@
 #include <string.h>
 #include "global.h"
 #include "util.h"
+#include "visitor.h"
 #include "compiler-parser.h"
 
 static int indent_level = 0;
