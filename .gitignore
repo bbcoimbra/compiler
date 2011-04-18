@@ -4,3 +4,16 @@ src/parser.[ch]
 *.orig
 *.o
 compiler
+Makefile
+autom4te.cache/
+config.h
+config.log
+config.status
+examples/f.gif
+examples/f.png
+examples/graph.gv
+src/.deps/
+src/Makefile
+src/compiler-parser.c
+src/compiler-parser.h
+stamp-h1
