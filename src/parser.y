@@ -7,12 +7,11 @@
 int yylex(void);
 void yyerror(const char *, ...);
 
+int lineno;
 char * saved_name;
 %}
 
 %union{
-int val;
-char * name;
 struct token_t *token;
 struct node_t *node;
 }
@@ -91,12 +90,13 @@ while_decl : WHILE LPAREN bool RPAREN stmts END
            ;
 
 attrib_decl : ID
-            { saved_name = copy_str (yylval.name); }
+            { saved_name = copy_str ((yylval.token)->value.name); lineno = yylval.token->lineno; }
             ATTR expr
             {
               $$ = new_stmt_node(attrib_k);
               $$->child[0] = $4;
               $$->attr.name = saved_name;
+							$$->lineno = lineno;
             }
             ;
 
@@ -104,7 +104,8 @@ read_decl : READ ID
           {
             $$ = new_stmt_node(read_k);
             $$->child[0] = new_expr_node(id_k);
-            $$->child[0]->attr.name = copy_str (yylval.name);
+            $$->child[0]->attr.name = copy_str ((yylval.token)->value.name);
+						$$->lineno = yylval.token->lineno;
           }
           ;
 
@@ -112,7 +113,8 @@ write_decl : WRITE ID
            {
             $$ = new_stmt_node(write_k);
             $$->child[0] = new_expr_node(id_k);
-            $$->child[0]->attr.name = copy_str (yylval.name);
+            $$->child[0]->attr.name = copy_str ((yylval.token)->value.name);
+						$$->lineno = yylval.token->lineno;
            }
            ;
 
@@ -215,12 +217,13 @@ factor : LPAREN expr RPAREN
        | ID
          {
            $$ = new_expr_node(id_k);
-           $$->attr.name = copy_str (yylval.name);
+           $$->attr.name = copy_str ((yylval.token)->value.name);
+					 $$->lineno = yylval.token->lineno;
          }
        | NUM
          {
            $$ = new_expr_node(const_k);
-           $$->attr.val = yylval.val;
+           $$->attr.val = (yylval.token)->value.val;
          }
        ;
 %%

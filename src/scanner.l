@@ -39,11 +39,14 @@ number  0|[1-9][0-9]*
 "("           return LPAREN;
 ")"           return RPAREN;
 {number}      {
-                yylval.val = atoi(yytext);
+                yylval.token = new_token();
+								(yylval.token)->value.val = atoi(yytext);
                 return NUM;
               }
 {identifier}  {
-                yylval.name = copy_str (yytext);
+                yylval.token = new_token();
+								(yylval.token)->value.name = copy_str (yytext);
+								(yylval.token)->lineno = yylineno;
                 return ID;
               }
 {ws}          /* ignore */;

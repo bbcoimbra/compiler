@@ -8,9 +8,9 @@ enum stmt_kind {if_k, while_k, attrib_k, write_k, read_k};
 enum expr_kind {op_k, id_k, const_k};
 
 struct token_t {
-  int type;
+	int lineno;
   union {
-    int num;
+    int val;
     char *name;
   } value;
 };

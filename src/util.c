@@ -37,6 +37,12 @@ struct node_t * new_stmt_node(enum stmt_kind kind)
 	return n;
 }
 
+struct token_t * new_token(void)
+{
+	struct token_t * t = (struct token_t *) malloc (sizeof (struct token_t));
+	return t;
+}
+
 void print_node(struct node_t * node)
 {
 	int i;
