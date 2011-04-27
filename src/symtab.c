@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_HASH_TABLE_ELEMENTS 1031
-
 unsigned int * generate_weigths(int size)
 {
 	int i;
@@ -25,7 +23,7 @@ unsigned int hash(char * id, unsigned int weigths[], int size)
 		temp = temp + id[i] * weigths[j];
 		j++;
 	}
-	h = temp % MAX_HASH_TABLE_ELEMENTS;
+	h = temp % size;
 	return h;
 }
 
