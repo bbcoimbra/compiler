@@ -1,6 +1,8 @@
 #ifndef _GLOBAL_H_
 #define _GLOBAL_H_
 
+#include "symtab.h"
+
 #define MAX_CHILDREN 3
 
 enum node_kind {stmt_k, expr_k};
@@ -32,6 +34,7 @@ struct node_t {
 };
 
 struct node_t * ast;
+struct symtab_t ** stab;
 
 #endif /* _GLOBAL_H_ */
 
