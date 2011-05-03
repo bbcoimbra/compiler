@@ -51,6 +51,8 @@ int symtab_insert (struct symtab_t ** tab, char * id)
 {
 	struct symtab_t * entry;
 	unsigned int h;
+	if (id == NULL)
+		return -1;
 	if ((entry = symtab_lookup (tab, id)) == NULL)
 	{
 		h = hash (id);
@@ -76,6 +78,8 @@ struct symtab_t * symtab_lookup (struct symtab_t ** tab, char * id)
 	struct symtab_t * entry;
 	unsigned int h;
 
+	if (id == NULL)
+		return NULL;
 	h = hash(id);
 	if (((**(tab+h)).id) && (strcmp ( (**(tab + h)).id, id) == 0))
 		return *(tab + h);
