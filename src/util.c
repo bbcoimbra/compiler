@@ -48,67 +48,67 @@ void print_node(struct node_t * node)
 	int i;
 
 	for (i = 0 ; i < indent_level ; i++)
-		printf("  ");
+		fprintf(stderr, "  ");
 
 	if (node == NULL)
 		return;
 	switch (node->kind)
 	{
 		case stmt_k:
-			printf("Stament: ");
+			fprintf(stderr, "Stament: ");
 			switch (node->type.stmt)
 			{
 				case if_k:
-					printf("IF\n"); break;
+					fprintf(stderr, "IF\n"); break;
 				case write_k:
-					printf("WRITE\n"); break;
+					fprintf(stderr, "WRITE\n"); break;
 				case attrib_k:
-					printf("ATTRIB to %s\n", node->attr.name); break;
+					fprintf(stderr, "ATTRIB to %s\n", node->attr.name); break;
 				case while_k:
-					printf("WHILE\n"); break;
+					fprintf(stderr, "WHILE\n"); break;
 				case read_k:
-					printf("READ\n"); break;
+					fprintf(stderr, "READ\n"); break;
 			}
 			break;
 		case expr_k:
-			printf("Expression: ");
+			fprintf(stderr, "Expression: ");
 			switch (node->type.expr)
 			{
 				case id_k:
-					printf("ID: %s\n", node->attr.name); break;
+					fprintf(stderr, "ID: %s\n", node->attr.name); break;
 				case op_k:
-					printf("OP: ");
+					fprintf(stderr, "OP: ");
 					switch (node->attr.op)
 					{
 						case AND:
-							printf("&&"); break;
+							fprintf(stderr, "&&"); break;
 						case OR:
-							printf("||"); break;
+							fprintf(stderr, "||"); break;
 						case EQ:
-							printf("=="); break;
+							fprintf(stderr, "=="); break;
 						case NEQ:
-							printf("!="); break;
+							fprintf(stderr, "!="); break;
 						case GE:
-							printf(">="); break;
+							fprintf(stderr, ">="); break;
 						case GT:
-							printf(">"); break;
+							fprintf(stderr, ">"); break;
 						case LE:
-							printf("<="); break;
+							fprintf(stderr, "<="); break;
 						case LT:
-							printf("<"); break;
+							fprintf(stderr, "<"); break;
 						case PLUS:
-							printf("+"); break;
+							fprintf(stderr, "+"); break;
 						case MINUS:
-							printf("-"); break;
+							fprintf(stderr, "-"); break;
 						case TIMES:
-							printf("*"); break;
+							fprintf(stderr, "*"); break;
 						case OVER:
-							printf("/"); break;
+							fprintf(stderr, "/"); break;
 					}
-					printf("\n");
+					fprintf(stderr, "\n");
 					break;
 				case const_k:
-					printf("NUM: %d\n", node->attr.val); break;
+					fprintf(stderr, "NUM: %d\n", node->attr.val); break;
 			}
 			break;
 	}

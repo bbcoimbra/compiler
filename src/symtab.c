@@ -110,14 +110,14 @@ void symtab_print(struct symtab_t ** tab)
 		entry = *(tab + i);
 		if (entry->id && (strlen(entry->id) != 0))
 		{
-			printf("Entry %d:\n", i);
-			printf("IDs: %s", entry->id);
+			fprintf(stderr, "Entry %d:\n", i);
+			fprintf(stderr, "IDs: %s", entry->id);
 			while (entry->next != NULL)
 			{
 				entry = entry->next;
-				printf(", %s", entry->id);
+				fprintf(stderr, ", %s", entry->id);
 			}
-			printf("\n");
+			fprintf(stderr, "\n");
 		}
 	}
 	return;
