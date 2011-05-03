@@ -128,7 +128,13 @@ char * copy_str (char * str)
 
 void print_tree (struct node_t * node)
 {
+	static int first = 1;
 	int i = 0;
+
+	if (first){
+		fprintf (stderr, "\n======== Printing AST ========\n");
+		first = 0;
+	}
 
 	if (node != NULL)
 	{

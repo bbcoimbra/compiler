@@ -105,6 +105,8 @@ void symtab_print(struct symtab_t ** tab)
 {
 	int i;
 	struct symtab_t * entry;
+
+	fprintf(stderr, "\n======== Printing Symtab ========\n");
 	for (i = 0; i < HASH_TABLE_SIZE; i++)
 	{
 		entry = *(tab + i);
