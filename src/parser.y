@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "global.h"
 #include "util.h"
+#include "symtab.h"
 
 int yylex(void);
 void yyerror(const char *, ...);
@@ -96,7 +97,8 @@ attrib_decl : ID
               $$ = new_stmt_node(attrib_k);
               $$->child[0] = $4;
               $$->attr.name = saved_name;
-							$$->lineno = lineno;
+              $$->lineno = lineno;
+              symtab_insert(stab, saved_name);
             }
             ;
 
@@ -105,7 +107,8 @@ read_decl : READ ID
             $$ = new_stmt_node(read_k);
             $$->child[0] = new_expr_node(id_k);
             $$->child[0]->attr.name = copy_str ((yylval.token)->value.name);
-						$$->lineno = yylval.token->lineno;
+            $$->lineno = yylval.token->lineno;
+            symtab_insert(stab, (yylval.token)->value.name);
           }
           ;
 
@@ -216,9 +219,16 @@ factor : LPAREN expr RPAREN
        { $$ = $2; }
        | ID
          {
+           struct symtab_t * symbol = NULL;
            $$ = new_expr_node(id_k);
            $$->attr.name = copy_str ((yylval.token)->value.name);
-					 $$->lineno = yylval.token->lineno;
+           $$->lineno = yylval.token->lineno;
+           symbol = symtab_lookup(stab, (yylval.token)->value.name);
+           if ( symbol == NULL )
+           {
+             fprintf(stderr,"Syntax error: Symbol '%s' not found, line %d.\n", (yylval.token)->value.name, yylval.token->lineno);
+             exit(EXIT_FAILURE);
+           }
          }
        | NUM
          {
