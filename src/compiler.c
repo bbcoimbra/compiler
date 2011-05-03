@@ -7,6 +7,8 @@
 
 FILE *yyin;
 
+void usage (char * arg);
+
 int main(int argc, char **argv, char **env)
 {
 
@@ -21,3 +23,10 @@ int main(int argc, char **argv, char **env)
 	return EXIT_SUCCESS;
 
 }
+
+void usage (char * arg)
+{
+	fprintf(stderr, "Usage: %s [-s] [-t] [-d <DOT_file_name>] [-c <C_file_name>] <input_file>\n", arg);
+	return;
+}
+
