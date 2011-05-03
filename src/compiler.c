@@ -5,6 +5,7 @@
 #include "util.h"
 #include "compiler-parser.h"
 #include "symtab.h"
+#include "cgen.h"
 
 FILE *yyin;
 extern struct symtab_t ** stab;
@@ -58,6 +59,8 @@ int main(int argc, char **argv, char **env)
 		print_tree(ast);
 	if (print_st)
 		symtab_print(stab);
+	if(cfile)
+		cgen(cfile, ast, stab);
 
 	return EXIT_SUCCESS;
 
