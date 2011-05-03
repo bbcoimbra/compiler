@@ -4,8 +4,10 @@
 #include "global.h"
 #include "util.h"
 #include "compiler-parser.h"
+#include "symtab.h"
 
 FILE *yyin;
+extern struct symtab_t ** stab;
 
 void usage (char * arg);
 
@@ -46,6 +48,7 @@ int main(int argc, char **argv, char **env)
 	}
 
 	yyin = fopen(argv[optind], "r");
+	stab = symtab_new();
 	if (yyparse() != 0)
 	{
 		fprintf(stderr, "Compilation failure!\n");
@@ -53,6 +56,8 @@ int main(int argc, char **argv, char **env)
 	}
 	if (print_ast)
 		print_tree(ast);
+	if (print_st)
+		symtab_print(stab);
 
 	return EXIT_SUCCESS;
 
