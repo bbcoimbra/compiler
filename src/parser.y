@@ -91,7 +91,10 @@ while_decl : WHILE LPAREN bool RPAREN stmts END
            ;
 
 attrib_decl : ID
-            { saved_name = copy_str ((yylval.token)->value.name); lineno = yylval.token->lineno; }
+            {
+              saved_name = copy_str ((yylval.token)->value.name);
+              lineno = yylval.token->lineno;
+            }
             ATTR expr
             {
               $$ = new_stmt_node(attrib_k);
@@ -117,7 +120,7 @@ write_decl : WRITE ID
             $$ = new_stmt_node(write_k);
             $$->child[0] = new_expr_node(id_k);
             $$->child[0]->attr.name = copy_str ((yylval.token)->value.name);
-						$$->lineno = yylval.token->lineno;
+            $$->lineno = yylval.token->lineno;
            }
            ;
 
