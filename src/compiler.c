@@ -60,7 +60,7 @@ int main(int argc, char **argv, char **env)
 	if (print_st)
 		symtab_print(stab);
 	if(cfile)
-		cgen(cfile, ast, stab);
+		generate_c (cfile, ast, stab);
 
 	return EXIT_SUCCESS;
 
