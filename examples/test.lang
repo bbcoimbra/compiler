@@ -1,5 +1,7 @@
 leia x;
 leia y;
+leia fator;
+termo = 20;
 z = 0;
 se (x > 5)
 	leia y;
