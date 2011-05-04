@@ -12,6 +12,9 @@ void emit_const (FILE * cfile, struct node_t * node);
 void emit_id (FILE * cfile, struct node_t * node);
 void emit_if (FILE * cfile, struct node_t * node);
 void emit_while (FILE * cfile, struct node_t * node);
+void emit_attrib (FILE * cfile, struct node_t * node);
+void emit_read (FILE * cfile, struct node_t * node);
+void emit_write (FILE * cfile, struct node_t * node);
 
 void generate_c (FILE * cfile, struct node_t * ast, struct symtab_t ** stab)
 {
@@ -22,6 +25,7 @@ void generate_c (FILE * cfile, struct node_t * ast, struct symtab_t ** stab)
 	fprintf(cfile, "{\n");
 	declare_variables(cfile, stab);
 	gen_c(cfile, ast);
+	fprintf(cfile, "exit(EXIT_SUCCESS)\n");
 	fprintf(cfile, "}\n");
 	return;
 }
@@ -65,6 +69,15 @@ void gen_c (FILE * cfile, struct node_t * ast)
 						break;
 					case while_k:
 						emit_while (cfile, node);
+						break;
+					case attrib_k:
+						emit_attrib (cfile, node);
+						break;
+					case read_k:
+						emit_read (cfile, node);
+						break;
+					case write_k:
+						emit_write (cfile, node);
 						break;
 				}
 				break;
@@ -171,6 +184,29 @@ void emit_while (FILE * cfile, struct node_t * node)
 	fprintf (cfile, ")\n{\n");
 	gen_c (cfile, node->child[1]);
 	fprintf (cfile, "}\n");
+	return;
+}
+
+void emit_attrib (FILE * cfile, struct node_t * node)
+{
+	fprintf (cfile, "%s = ", node->attr.name);
+	gen_c (cfile, node->child[0]);
+	fprintf (cfile, ";\n");
+}
+
+void emit_read (FILE * cfile, struct node_t * node)
+{
+	fprintf (cfile, "scanf(\"%%d\", &");
+	gen_c (cfile, node->child[0]);
+	fprintf (cfile, ");\n");
+	return;
+}
+
+void emit_write (FILE * cfile, struct node_t * node)
+{
+	fprintf (cfile, "printf(\"%%d\", ");
+	gen_c (cfile, node->child[0]);
+	fprintf (cfile, ");\n");
 	return;
 }
 
