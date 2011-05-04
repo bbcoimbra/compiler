@@ -18,15 +18,15 @@ void emit_write (FILE * cfile, struct node_t * node);
 
 void generate_c (FILE * cfile, struct node_t * ast, struct symtab_t ** stab)
 {
-	fprintf(cfile, "#include <unistd.h>\n");
-	fprintf(cfile, "#include <stdlib.h>\n");
-	fprintf(cfile, "#include <stdio.h>\n");
-	fprintf(cfile, "int main (int argc, char **argv)\n");
-	fprintf(cfile, "{\n");
-	declare_variables(cfile, stab);
-	gen_c(cfile, ast);
-	fprintf(cfile, "exit(EXIT_SUCCESS)\n");
-	fprintf(cfile, "}\n");
+	fprintf (cfile, "#include <unistd.h>\n");
+	fprintf (cfile, "#include <stdlib.h>\n");
+	fprintf (cfile, "#include <stdio.h>\n");
+	fprintf (cfile, "int main (int argc, char **argv)\n");
+	fprintf (cfile, "{\n");
+	declare_variables (cfile, stab);
+	gen_c (cfile, ast);
+	fprintf (cfile, "exit(EXIT_SUCCESS)\n");
+	fprintf (cfile, "}\n");
 	return;
 }
 
@@ -35,7 +35,7 @@ void declare_variables (FILE * cfile, struct symtab_t ** stab)
 	int i;
 	struct symtab_t * entry;
 
-	fprintf(cfile, "  int");
+	fprintf (cfile, "  int");
 	for (i = 0; i < HASH_TABLE_SIZE ; i++)
 	{
 		static int first = 1;
@@ -43,13 +43,13 @@ void declare_variables (FILE * cfile, struct symtab_t ** stab)
 		if (entry != NULL && entry->id != NULL)
 			if (first)
 			{
-				fprintf(cfile, " %s", entry->id);
+				fprintf (cfile, " %s", entry->id);
 				first = 0;
 			}
 			else
-				fprintf(cfile, ", %s", entry->id);
+				fprintf (cfile, ", %s", entry->id);
 	}
-	fprintf(cfile, ";\n");
+	fprintf (cfile, ";\n");
 	return;
 }
 
