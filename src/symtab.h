@@ -1,6 +1,7 @@
 #ifndef _SYMTAB_H
 #define _SYMTAB_H
 
+#define HASH_TABLE_SIZE 1117
 #define VAR_LOCATIONS 512
 
 struct locations {

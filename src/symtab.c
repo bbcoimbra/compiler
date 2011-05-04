@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#define HASH_TABLE_SIZE 1117
-
 unsigned int weight_array[HASH_TABLE_SIZE + 1];
 
 void generate_weights(void)
