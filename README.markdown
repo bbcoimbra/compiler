@@ -4,21 +4,25 @@ This project is under development as a proof of concept of my
 degree thesis for Data Processing Technologist for FATEC-SP
 in Brazil.
 
-	*Disclaimer*: There are lots of bugs and untested scenarios.
+**Disclaimer**: There are lots of untested scenarios.
 
 ## Compiling
 
 Project uses autotools for building and distribution. So you
 just need to clone this repository and execute in your shell:
 
-	$ ./configure && make
+```bash
+./configure && make
+```
 
 If compilations runs ok, a binary named compiler will be placed
 at src/ directory.
 
 ## Usage
 
-	compiler [-t] [-s] [-c file_name] input_file
+```bash
+compiler [-t] [-s] [-c file_name] input_file
+```
 
 ## Grammar Recognized
 
@@ -74,7 +78,7 @@ Follow grammar is recognized:
 	factor : LPAREN expr RPAREN
 				 | ID
 				 | NUM
-         ;
+				 ;
 
 Terminals are that written in uppercase and their tokens are described in
 _src/scanner.l_. For now, tokens that represent key words are lowercase
