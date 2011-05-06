@@ -29,56 +29,55 @@ compiler [-t] [-s] [-c file_name] input_file
 Follow grammar is recognized:
 
 	stmts : stmts stmt
-				| stmt
-				;
+	      | stmt
+	      ;
 
 	stmt  : if_decl SEMI
-				| while_decl SEMI
-				| attrib_decl SEMI
-				| read_decl SEMI
-				| write_decl SEMI
-				;
+	      | while_decl SEMI
+	      | attrib_decl SEMI
+	      | read_decl SEMI
+	      | write_decl SEMI
+	      ;
 
 	if_decl  : IF LPAREN bool RPAREN stmts END
-					 | IF LPAREN bool RPAREN stmts ELSE stmts END
-					 ;
+	         | IF LPAREN bool RPAREN stmts ELSE stmts END
+	         ;
 
 	while_decl : WHILE LPAREN bool RPAREN stmts END
-						 ;
+	           ;
 
-	attrib_decl : ID
-							ATTR expr
-							;
+	attrib_decl : ID ATTR expr
+	            ;
 
 	read_decl : READ ID
-						;
+	          ;
 
 	write_decl : WRITE ID
-						 ;
+	           ;
 
 	expr : expr PLUS expr
-			 | expr MINUS expr
-			 | expr TIMES expr
-			 | expr OVER expr
-			 | factor
-			 | bool
-			 ;
+	     | expr MINUS expr
+	     | expr TIMES expr
+	     | expr OVER expr
+	     | factor
+	     | bool
+	     ;
 
 	bool : expr OR expr
-			 | expr AND expr
-			 | expr EQ expr
-			 | expr NEQ expr
-			 | expr GT expr
-			 | expr LT expr
-			 | expr GE expr
-			 | expr LE expr
-			 | expr
-			 ;
+	     | expr AND expr
+	     | expr EQ expr
+	     | expr NEQ expr
+	     | expr GT expr
+	     | expr LT expr
+	     | expr GE expr
+	     | expr LE expr
+	     | expr
+	     ;
 
 	factor : LPAREN expr RPAREN
-				 | ID
-				 | NUM
-				 ;
+	       | ID
+	       | NUM
+	       ;
 
 Terminals are that written in uppercase and their tokens are described in
 _src/scanner.l_. For now, tokens that represent key words are lowercase
