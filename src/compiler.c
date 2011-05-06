@@ -6,6 +6,7 @@
 #include "compiler-parser.h"
 #include "symtab.h"
 #include "cgen.h"
+#include "dotgen.h"
 
 FILE *yyin;
 extern struct symtab_t ** stab;
@@ -61,6 +62,8 @@ int main(int argc, char **argv, char **env)
 		symtab_print(stab);
 	if(cfile)
 		generate_c (cfile, ast, stab);
+	if (dotfile)
+		generate_dot (dotfile, ast);
 
 	return EXIT_SUCCESS;
 
