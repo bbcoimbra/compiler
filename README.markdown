@@ -86,7 +86,7 @@ words but written in Portuguese, e. g. IF, WHILE are "se", "enquanto",
 respectively. LPAREN and RPAREN means "(" and ")", SEMI means ";".
 Mathematical names means their usual symbols, e. g. PLUS means "+".
 Same rule is applyed to comparisons, e. g., EQ means "==" and GT means ">".
-IDs are string identifiers (a.k.a. variables) and NUMs are numeric integral
+IDs are string identifiers (a.k.a. variables) and NUMs are numeric integer
 constants.
 
 
