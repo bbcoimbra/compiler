@@ -48,7 +48,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_compiler_OBJECTS = compiler-parser.$(OBJEXT) scanner.$(OBJEXT) \
 	visitor.$(OBJEXT) util.$(OBJEXT) symtab.$(OBJEXT) \
-	cgen.$(OBJEXT) compiler.$(OBJEXT)
+	cgen.$(OBJEXT) dotgen.$(OBJEXT) compiler.$(OBJEXT)
 compiler_OBJECTS = $(am_compiler_OBJECTS)
 compiler_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
@@ -159,7 +159,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-compiler_SOURCES = parser.y scanner.l visitor.c visitor.h util.c util.h symtab.c symtab.h cgen.c cgen.h compiler.c global.h
+compiler_SOURCES = parser.y scanner.l visitor.c visitor.h util.c util.h symtab.c symtab.h cgen.c cgen.h dotgen.c dotgen.h compiler.c global.h
 compiler_YFLAGS = -d
 all: all-am
 
@@ -250,6 +250,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cgen.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/compiler-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/compiler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dotgen.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/scanner.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/symtab.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util.Po@am__quote@
