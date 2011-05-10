@@ -21,7 +21,9 @@ at src/ directory.
 ## Usage
 
 ```bash
-compiler [-t] [-s] [-c file_name] input_file
+compiler [-t] [-s] [-d dot_file_name] [-c c_file_name] input_file
+	-t	prints tree structure
+	-s	prints entries of Table of Symbols
 ```
 
 ## Grammar Recognized
