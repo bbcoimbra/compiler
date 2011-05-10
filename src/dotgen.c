@@ -89,12 +89,13 @@ void dot_emit_if (FILE * file, struct node_t * node, struct node_t * context)
 		free (child_name);
 		child_name = gen_name (node->child[2]);
 		fprintf(file, "%s -> %s;\n", node_name, child_name);
-		dot_gen_graph (file, node->child[2], node->next);
+		dot_gen_graph (file, node->child[2], (node->next != NULL ? node->next : context));
 	}
 	else
 	{
 		char * next;
-		next = gen_name (context);
+		if (node->next != NULL) next = gen_name (node->next);
+		else next = gen_name (context);
 		fprintf (file, "%s -> %s;\n", node_name, next);
 		free (next);
 	}
@@ -106,11 +107,17 @@ void dot_emit_if (FILE * file, struct node_t * node, struct node_t * context)
 void dot_emit_while (FILE * file, struct node_t * node, struct node_t * context)
 {
 	char *node_name, *child_name;
+	char * next;
 
 	node_name = gen_name (node);
 	child_name = gen_name (node->child[1]);
 	fprintf(file, "%s -> %s;\n", node_name, child_name);
 	dot_gen_graph (file, node->child[1], node);
+	if (node->next)	next = gen_name (node->next);
+	else next = gen_name (context);
+	fprintf (file, "%s -> %s;\n", node_name, next);
+	free (next);
+	free (node_name); free (child_name);
 	dot_gen_graph (file, node->next, context);
 	return;
 }
