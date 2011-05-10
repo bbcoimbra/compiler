@@ -77,6 +77,7 @@ void dot_gen_shapes (FILE * file, struct node_t * node)
 	if (node && node->kind == stmt_k)
 	{
 		char * name;
+		int i = 0;
 		name = gen_name (node);
 		switch (node->type.stmt)
 		{
@@ -96,6 +97,8 @@ void dot_gen_shapes (FILE * file, struct node_t * node)
 				exit(EXIT_FAILURE);
 		}
 		free(name);
+		for (i = 0; i < MAX_CHILDREN; i++)
+			dot_gen_shapes (file, node->child[i]);
 		dot_gen_shapes (file, node->next);
 	}
 	return;
