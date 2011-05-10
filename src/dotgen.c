@@ -17,6 +17,7 @@ void generate_dot (FILE * file, struct node_t * ast)
 void dot_emit_preamble (FILE * file)
 {
 	fprintf (file, "digraph program {\n");
+	fprintf (file, "node [shape=box];\n");
 	return;
 }
 
@@ -73,6 +74,30 @@ void dot_gen_graph (FILE * file, struct node_t * node, struct node_t * context)
 
 void dot_gen_shapes (FILE * file, struct node_t * node)
 {
+	if (node && node->kind == stmt_k)
+	{
+		char * name;
+		name = gen_name (node);
+		switch (node->type.stmt)
+		{
+			case if_k:
+				fprintf (file, "%s [shape=diamond];", name);
+				break;
+			case while_k:
+				fprintf (file, "%s [shape=diamond];", name);
+				break;
+			case read_k:
+			case write_k:
+			case attrib_k:
+				/* do nothing */
+				break;
+			default:
+				fprintf(stderr, "BUG\n");
+				exit(EXIT_FAILURE);
+		}
+		free(name);
+		dot_gen_shapes (file, node->next);
+	}
 	return;
 }
 
