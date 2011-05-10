@@ -16,7 +16,7 @@ void usage (char * arg);
 int main(int argc, char **argv, char **env)
 {
 
-	FILE *cfile, *dotfile;
+	FILE *cfile = NULL, *dotfile = NULL;
 	int print_st = 0, print_ast = 0;
 	int opt;
 
