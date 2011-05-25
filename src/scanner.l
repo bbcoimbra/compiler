@@ -50,5 +50,6 @@ number  0|[1-9][0-9]*
                 return ID;
               }
 {ws}          /* ignore */;
+
 .             printf("bad input character '%s' at line %d\n", yytext, yylineno);
 
