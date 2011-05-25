@@ -151,13 +151,3 @@ void print_tree (struct node_t * node)
 	return;
 }
 
-void print_tree2(struct node_t * node)
-{
-	int i = 0;
-	void (* fn)(struct node_t *);
-
-	fn = print_node;
-	pre_order(fn, node);
-
-	return;
-}

@@ -6,7 +6,6 @@ struct node_t * new_stmt_node (enum stmt_kind kind);
 struct token_t * new_token(void);
 void print_node (struct node_t * node);
 void print_tree (struct node_t * n);
-void print_tree2 (struct node_t * n);
 
 char *copy_str(char * str);
 
