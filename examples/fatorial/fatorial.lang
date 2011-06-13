@@ -1,0 +1,7 @@
+leia n;
+produto = 1;
+enquanto(n>1)
+	produto = produto * n;
+	n = n -1;
+fim;
+escreva produto;

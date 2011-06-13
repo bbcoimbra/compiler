@@ -1,0 +1,17 @@
+n0 = 0;
+n1 = 1;
+naux = 0;
+i = 0;
+leia n;
+n = n - 1;
+se (n == 0)
+	escreva n;
+senao
+	enquanto( i < n )
+		naux = n1;
+		n1 = n0 + n1;
+		n0 = naux;
+		i = i + 1;
+	fim;
+	escreva n1;
+fim;
