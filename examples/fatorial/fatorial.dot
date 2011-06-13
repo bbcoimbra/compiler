@@ -1,0 +1,10 @@
+digraph program {
+node [shape=box];
+read141583360 -> attrib141583576;
+attrib141583576 -> while141584392;
+while141584392 -> attrib141584080;
+attrib141584080 -> attrib141584352;
+attrib141584352 -> while141584392;
+while141584392 -> write141584464;
+write141584464;
+while141584392 [shape=diamond];}
