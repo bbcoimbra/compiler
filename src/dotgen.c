@@ -38,6 +38,48 @@ void dot_emit_finally (FILE * file)
 
 void dot_print_op(FILE * file, int kind)
 {
+	switch (kind)
+	{
+		case PLUS:
+			fprintf(file, " + ");
+			break;
+		case MINUS:
+			fprintf (file, " - ");
+			break;
+		case TIMES:
+			fprintf (file, " * ");
+			break;
+		case OVER:
+			fprintf (file, " / ");
+			break;
+		case EQ:
+			fprintf (file, " == ");
+			break;
+		case NEQ:
+			fprintf (file, " != ");
+			break;
+		case AND:
+			fprintf (file, " && ");
+			break;
+		case OR:
+			fprintf (file, " || ");
+			break;
+		case GE:
+			fprintf (file, " >= ");
+			break;
+		case GT:
+			fprintf (file, " > ");
+			break;
+		case LE:
+			fprintf (file, " <= ");
+			break;
+		case OR:
+			fprintf (file, " < ");
+			break;
+		default:
+			fprintf(file, "   ");
+			break;
+	}
 	return;
 }
 void dot_gen_if_label(FILE * file, struct node_t * node)
