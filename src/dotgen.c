@@ -145,11 +145,11 @@ void dot_emit_while (FILE * file, struct node_t * node, struct node_t * context)
 
 	node_name = gen_name (node);
 	child_name = gen_name (node->child[1]);
-	fprintf(file, "%s -> %s;\n", node_name, child_name);
+	fprintf(file, "%s -> %s [label =\"true\"];\n", node_name, child_name);
 	dot_gen_graph (file, node->child[1], node);
 	if (node->next)	next = gen_name (node->next);
 	else next = gen_name (context);
-	fprintf (file, "%s -> %s;\n", node_name, next);
+	fprintf (file, "%s -> %s [label =\"false\"];\n", node_name, next);
 	free (next);
 	free (node_name); free (child_name);
 	dot_gen_graph (file, node->next, context);
