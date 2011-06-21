@@ -73,7 +73,7 @@ void dot_print_op(FILE * file, int kind)
 		case LE:
 			fprintf (file, " <= ");
 			break;
-		case OR:
+		case LT:
 			fprintf (file, " < ");
 			break;
 		default:
