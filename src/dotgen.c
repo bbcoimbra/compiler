@@ -3,9 +3,11 @@
 #include <string.h>
 #include "global.h"
 #include "dotgen.h"
+#include "compiler-parser.h"
 
 char * gen_name(struct node_t *node);
 void dot_emit_preamble (FILE * file);
+void dot_gen_labels (FILE * file, struct node_t * node);
 void dot_gen_graph (FILE * file, struct node_t * node, struct node_t * context);
 void dot_gen_shapes (FILE * file,	struct node_t * node);
 void dot_emit_finally (FILE * file);
@@ -15,6 +17,7 @@ void dot_emit_while (FILE * file, struct node_t * node,	struct node_t * context)
 void generate_dot (FILE * file, struct node_t * ast)
 {
 	dot_emit_preamble(file);
+	dot_gen_labels (file, ast);
 	dot_gen_graph (file, ast, NULL);
 	dot_gen_shapes (file, ast);
 	dot_emit_finally (file);
@@ -31,6 +34,106 @@ void dot_emit_finally (FILE * file)
 {
 	fprintf (file, "}\n");
 	return;
+}
+
+void dot_print_op(FILE * file, int kind)
+{
+	return;
+}
+void dot_gen_if_label(FILE * file, struct node_t * node)
+{
+	char * name;
+	if (node && node->kind == stmt_k && node->type.stmt == if_k)
+	{
+		name = gen_name (node);
+		fprintf (file, "%s [label = \" ", name);
+		dot_gen_labels (file, node->child[0]);
+		fprintf (file, "\" ];\n");
+		free (name);
+
+		dot_gen_labels (file, node->child[1]);
+		dot_gen_labels (file, node->child[2]);
+	}
+	return;
+}
+
+void dot_gen_while_label(FILE * file, struct node_t * node)
+{
+	char * name;
+	if (node && node->kind == stmt_k && node->type.stmt == while_k)
+	{
+		name = gen_name (node);
+		fprintf (file, "%s [label = \" ", name);
+		dot_gen_labels (file, node->child[0]);
+		fprintf (file, "\" ];\n");
+		free (name);
+
+		dot_gen_labels (file, node->child[1]);
+	}
+	return;
+}
+
+void dot_gen_labels (FILE * file, struct node_t * node)
+{
+	char *name;
+
+	if (node)
+	{
+		switch (node->kind)
+		{
+			case stmt_k:
+				switch (node->type.stmt)
+				{
+					case if_k:
+						dot_gen_if_label(file, node);
+						break;
+					case while_k:
+						dot_gen_while_label(file, node);
+						break;
+					case attrib_k:
+						name = gen_name (node);
+						fprintf (file, "%s [label = \"", name);
+						fprintf (file, "%s = ", node->attr.name);
+						dot_gen_labels (file, node->child[0]);
+						fprintf (file, "\" ];\n");
+						free (name);
+						break;
+					case read_k:
+						name = gen_name (node);
+						fprintf (file, "%s [label = \"", name);
+						fprintf(file, "leia ");
+						dot_gen_labels (file, node->child[0]);
+						fprintf (file, "\" ];\n");
+						free (name);
+						break;
+					case write_k:
+						name = gen_name (node);
+						fprintf (file, "%s [label = \"", name);
+						fprintf(file, "escreva ");
+						dot_gen_labels (file, node->child[0]);
+						fprintf (file, "\" ];\n");
+						free (name);
+						break;
+				}
+				break;
+			case expr_k:
+				switch (node->type.expr) {
+					case const_k:
+						fprintf (file, "%d", node->attr.val);
+						break;
+					case op_k:
+						dot_gen_labels (file, node->child[0]);
+						dot_print_op(file, node->attr.op);
+						dot_gen_labels (file, node->child[1]);
+						break;
+					case id_k:
+						fprintf (file, "%s", node->attr.name);
+						break;
+				}
+				break;
+		}
+		dot_gen_labels (file, node->next);
+	}
 }
 
 void dot_gen_graph (FILE * file, struct node_t * node, struct node_t * context)
