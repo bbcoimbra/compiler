@@ -1,10 +1,16 @@
 digraph program {
 node [shape=box];
-read141583360 -> attrib141583576;
-attrib141583576 -> while141584392;
-while141584392 -> attrib141584080;
-attrib141584080 -> attrib141584352;
-attrib141584352 -> while141584392;
-while141584392 -> write141584464;
-write141584464;
-while141584392 [shape=diamond];}
+read169292440 [label = "leia n" ];
+attrib169292656 [label = "produto = 1" ];
+while169293472 [label = " n > 1" ];
+attrib169293160 [label = "produto = produto * n" ];
+attrib169293432 [label = "n = n - 1" ];
+write169293544 [label = "escreva produto" ];
+read169292440 -> attrib169292656;
+attrib169292656 -> while169293472;
+while169293472 -> attrib169293160 [label ="true"];
+attrib169293160 -> attrib169293432;
+attrib169293432 -> while169293472;
+while169293472 -> write169293544 [label ="false"];
+write169293544;
+while169293472 [shape=diamond];}
